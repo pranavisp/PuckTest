@@ -5,8 +5,8 @@
  <body>
 <script src="https://www.puck-js.com/puck.js"></script>
 <button id="btnConnect">Connect</button>
-<p>X: <span class="bar"><span id="barX"></span></span></p>
-<p>Y: <span class="bar"><span id="barY"></span></span></p>
+<p>X: <span class="bar"><span id="barYes"></span></span></p>
+<p>Y: <span class="bar"><span id="barNo"></span></span></p>
 <p>Z: <span class="bar"><span id="barZ"></span></span></p>
 <script>
 // Code to upload to Bangle.js
@@ -14,8 +14,8 @@ var BANGLE_CODE = `
 Bangle.on('accel',function(a) {
   var d = [
     "A",
-    Math.round(a.x*100),
-    Math.round(a.y*100),
+    Math.round(a.yes*100),
+    Math.round(a.no*100),
     Math.round(a.z*100)
     ];
   Bluetooth.println(d.join(","));
@@ -66,13 +66,13 @@ function onLine(line) {
   if (d.length==4 && d[0]=="A") {
     // we have an accelerometer reading
     var accel = {
-      x : parseInt(d[1]),
-      y : parseInt(d[2]),
+      yes : parseInt(d[1]),
+      no : parseInt(d[2]),
       z : parseInt(d[3]),
     };    
     // Update bar positions
-    setBarPos("barX", accel.x);
-    setBarPos("barY", accel.y);
+    setBarPos("barYes", accel.x);
+    setBarPos("barNo", accel.y);
     setBarPos("barZ", accel.z);
   }
 }
